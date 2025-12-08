@@ -66,15 +66,7 @@ pipeline {
                 sh '''
 				 curl https://cli-assets.heroku.com/install.sh | sh
                  heroku container:login
-				 APP_NAME="ngcorp-staging"
-
-                echo "Checking if app exists…"
-                if heroku apps:info -a $APP_NAME > /dev/null 2>&1; then
-                  echo "App already exists: $APP_NAME"
-                else
-                  echo "Creating app: $APP_NAME"
-                  heroku create $APP_NAME
-                fi
+				 heroku create $STAGING || echo "project already exist"
 				 heroku container:push -a $STAGING web
 				 heroku container:release -a $STAGING web
 				 '''
