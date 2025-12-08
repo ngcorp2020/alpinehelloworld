@@ -2,8 +2,8 @@ pipeline {
     environment {
 	  IMAGE_NAME = "alpinehelloworld"
 	  IMAGE_TAG  = "latest"
-	  STAGING = "staging"
-	  PRODUCTION = "production"
+	  STAGING = "ngcorp-staging"
+	  PRODUCTION = "ngcorp-production"
 	}
 	agent none
 	stages {
@@ -66,7 +66,7 @@ pipeline {
                 sh '''
 				 curl https://cli-assets.heroku.com/install.sh | sh
                  heroku container:login
-				 APP_NAME="staging"
+				 APP_NAME="ngcorp-staging"
 
                 echo "Checking if app exists…"
                 if heroku apps:info -a $APP_NAME > /dev/null 2>&1; then
