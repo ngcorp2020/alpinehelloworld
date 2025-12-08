@@ -89,6 +89,7 @@ pipeline {
 				 curl https://cli-assets.heroku.com/install.sh | sh
                  heroku container:login
 				 heroku create $PRODUCTION || echo "project already exist"
+                 heroku stack:set container -a ngcorp-staging
 				 heroku container:push -a $PRODUCTION web
 				 heroku container:release -a $PRODUCTION web
 				 '''
